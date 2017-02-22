@@ -1,0 +1,34 @@
+{
+    "level1Prop1": "@faker.address.state()",
+    "level1Prop2": {
+        "level2Prop1": "@faker.address.streetAddress()",
+        "level2Prop3": {
+            "level3Prop1": [{{repeat 3}}"@faker.address.countryCode()"{{/repeat}}]
+        },
+        "level2Prop5": "@faker.random.number({ \"min\": 100, \"max\": 500 })"
+    },
+    "level1Prop3": [
+        1,
+        2
+    ],
+    "level1Prop4": [
+        {
+            "name": "@faker.name.findName()",
+            "country": "@faker.address.country()"
+        }
+    ],
+    "level1Prop5": 123456,
+    "level1Prop6": "test string",
+    "level1Prop7": "@faker.helpers.randomize(['type1', 'type2', 'type3', 'type4'])",
+    "level1Prop8": "@faker.file.name(./test/test-include.json)",
+    "level1Prop9": "@faker.file.name(nofile.json)",
+    "level1Prop10": [{{repeat 2}}"@faker.file.name(./test/test-include.json)"{{/repeat}}],
+    "level1Prop11": "@faker.file.name(./test/test.json)",
+    "level1Prop12": [{{repeat 1}}"@faker.file.name(asdasda)"{{/repeat}}],
+    "level1Prop13": [
+        "@faker.name.findName()",
+        "@faker.address.country()"
+    ],
+    "level1Prop14": "@faker.random.number({invalidParams:12})",
+    "level1Prop15": "12"
+}

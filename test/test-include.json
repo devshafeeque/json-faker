@@ -1,0 +1,5 @@
+{
+  "name": "@faker.name.findName()",
+  "companyName": "@faker.company.companyName()",
+  "team": [{{repeat 5}}"@faker.name.findName()"{{/repeat}}]
+}

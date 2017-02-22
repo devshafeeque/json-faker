@@ -1,0 +1,4 @@
+{
+    "inclevel1Prop1": "@faker.address.state()",
+    "inclevel1Prop3": "{{prop3.L1}} -  {{prop3.L2}}"
+}

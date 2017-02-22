@@ -1,0 +1,37 @@
+{
+    "level1Prop1": "@faker.company.companyName()",
+    "level1Prop2": {
+        "level2Prop1": {
+            "name": "@faker.address.streetAddress()"
+        },
+        "level2Prop2": "@faker.address.city()",
+        "level2Prop3": {
+            "level3Prop1": [{{repeat 2}}"@faker.address.countryCode()[3]"{{/repeat}}]
+        },
+        "level2Prop4": "@faker.helpers.randomize(['type1', 'type2', 'type3', 'type4'])",
+        "level2Prop5": "@faker.random.number()",
+        "level2Prop6": "@faker.random.number({ \"min\": 100, \"max\": 500 })"
+    },
+    "level1Prop3": {
+        "name": "Static Value",
+        "temp": "@faker.file.name(./samples/include-test.json)"
+    },
+    "level1Prop4": [
+        1,
+        2
+    ],
+    "level1Prop5": [
+        {{repeat 3}}
+        {
+            "name": "@faker.name.findName()",
+            "country": "@faker.address.country()"
+        }
+        {{/repeat}}
+    ],
+    "level1Prop6": "@faker.file.name(./samples/include2.json)",
+    "level1Prop7": [{{repeat 2}}"@faker.file.name(./samples/include-test.json)"{{/repeat}}],
+    "level1Prop8": "Static string value",
+    "level1Prop9": 1123,
+    "level1Prop10": "@faker.file.name(./samples/sample.json)",
+    "level1Prop11": "{{prop1}}"
+}

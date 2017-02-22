@@ -1,0 +1,32 @@
+{
+  "name": "json-faker",
+  "version": "1.0.4",
+  "description": "This application creates json with fake contextual data. It takes input as a template.",
+  "main": "src/json-faker.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "nodemon ./",
+    "coverage": "istanbul cover node_modules/mocha/bin/_mocha"
+  },
+  "author": "Shafeeque",
+  "license": "ISC",
+  "dependencies": {
+    "faker": "^3.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shafeeq116/json-faker.git"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.11.0"
+  },
+  "semistandard": {
+    "globals": [
+      "describe",
+      "it",
+      "expect"
+    ]
+  }
+}

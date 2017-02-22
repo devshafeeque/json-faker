@@ -1,0 +1,26 @@
+{
+    "inclevel1Prop1": "@faker.address.state()",
+    "inclevel1Prop2": {
+        "inclevel2Prop1": {
+            "inclevel3Prop1": "@faker.address.countryCode()",
+            "inclevel3Prop2": [
+                {
+                    "name": "@faker.name.findName()",
+                    "country": "@faker.address.country()"
+                },
+                {
+                    "name": "@faker.name.findName()",
+                    "country": "@faker.address.country()"
+                }
+            ],
+            "inclevel2Prop3": {
+                "inclevel3Prop1": "@faker.address.country()[7]"
+            }
+        },
+        "inclevel1Prop3": "some static string here",
+        "inclevel1Prop4": 12345,
+        "inclevel1Prop5": "@faker.file.name(./samples/include-test.json)",
+        "inclevel1Prop6": "@faker.file.name('asdasdasdasdadasd./samples/sample.json')"
+    },
+    "inclevel1Prop3": "asdasd"
+}
