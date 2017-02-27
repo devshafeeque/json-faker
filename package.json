@@ -9,7 +9,7 @@
     "coverage": "istanbul cover node_modules/mocha/bin/_mocha"
   },
   "author": "Shafeeque",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "faker": "^3.1.0"
   },
