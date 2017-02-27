@@ -115,7 +115,7 @@ JsonFaker.prototype.createFakerData = function (inputValue) {
   /*
   Example
   input => '@faker.name.findName('someArg')
-  output => 
+  output =>
   [ '@faker.name.findName(\'someArg\')',
   '@faker.name.findName',
   '\'someArg\'',
