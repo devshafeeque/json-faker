@@ -9,7 +9,7 @@ npm install json-faker
 
 ## How to Use
 
-Include json-faker
+#### Node.js
 
 ```
 var JsonFaker = require('json-faker');
@@ -40,11 +40,26 @@ Output
 ```
 { "prop1": "MarLand", "prop2": "Sample String" }  
 ```
+
+#### Browser
+
+###### Note: Reading json object from file won't work inside browser
+
+```
+<script src = "node_modules/json-faker/build/json-faker.js" type = "text/javascript"></script>
+<script>
+  var stringTemplate = '{ "prop1": "@faker.address.city()", "prop2":"string here" }';
+  var result = jsonFaker.process(stringTemplate);
+  console.log(result);
+</script>
+```
+
+
 Use faker for creating templates,
 '@faker.object.function()'
 any valid object.function() provided by faker will be processed to generate values.
 
-for more information [Faker API Doc](https://www.npmjs.com/package/faker) 
+for more information [Faker API Doc](https://www.npmjs.com/package/faker)
 
 ## Available Functions
 
@@ -54,19 +69,19 @@ for more information [Faker API Doc](https://www.npmjs.com/package/faker)
  * delete()
 
 
-### JsonFaker.process(inputTemplate) 
+### JsonFaker.process(inputTemplate)
 Process the json template and return json object with faker data
 
 ```
 Input  -> String / Object / json file
-Output -> JSON object 
+Output -> JSON object
 ```
 
 ###### Example:
-###### Object String 
+###### Object String
 
 ```
-var stringTemplate = '{ "name": "@faker.address.findName()", "city":"@faker.name.city()" }'; 
+var stringTemplate = '{ "name": "@faker.address.findName()", "city":"@faker.name.city()" }';
 var fakeJson = JsonFaker.process(stringTemplate); // returns object
 ```
 Output
@@ -78,7 +93,7 @@ Output
 }
 ```
 
-###### Object 
+###### Object
 
 ```
 var objectTemplate = {
@@ -94,7 +109,7 @@ Output
 }
 ```
 
-###### File 
+###### File
 
 ```
 var templateFile = 'Sample.json';
@@ -139,7 +154,7 @@ Output
 
 ## Available Options
 
-##### Single string 
+##### Single string
 Input
 ```
 {
@@ -281,7 +296,7 @@ Output
 }
 ````
 
-Array Repeat 
+Array Repeat
 
 Input
 ```
@@ -314,17 +329,9 @@ Output
   ]
 }
 ```
- 
- TODO: 
+
+ TODO:
+
+ Index for repeat
 
  Nested repeat template processing
- 
-        
-        
-
-
-
-
-
-
-
