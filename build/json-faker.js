@@ -1,5 +1,73 @@
 var jsonFaker =
-webpackJsonpjsonFaker([0,1],[
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 962);
+/******/ })
+/************************************************************************/
+/******/ ([
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -69014,245 +69082,278 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 var faker = __webpack_require__(1);
 var fs = __webpack_require__(2);
 
-var JsonFaker = function JsonFaker() {
-  this.validValueTypes = ['object', 'json', 'jsonString'];
-  this.fileList = [];
-  this.userTemplate = {};
-};
+var JsonFaker = function () {
+    function JsonFaker() {
+        _classCallCheck(this, JsonFaker);
 
-JsonFaker.prototype.process = function (content, userTemplate) {
-  this.userTemplate = userTemplate;
-  var inputType = this.getInputType(content);
-  if (!this.validValueTypes.includes(inputType)) return 'Invalid input data';
-
-  if (inputType === 'json') this.fileList.push(content);
-
-  var jsonObj = this.getJsonObj(content, inputType);
-  if (jsonObj === 'Invalid input') return jsonObj;
-
-  var getReturnData = this.generateMock(jsonObj);
-
-  return getReturnData;
-};
-
-JsonFaker.prototype.post = function (inputArg) {
-  return this.createResponse(inputArg);
-};
-
-JsonFaker.prototype.put = function (inputArg) {
-  return this.createResponse(inputArg);
-};
-
-JsonFaker.prototype.delete = function (inputArg) {
-  return this.createResponse(inputArg);
-};
-
-JsonFaker.prototype.createResponse = function (inputObj) {
-  if ((typeof inputObj === 'undefined' ? 'undefined' : _typeof(inputObj)) !== 'object') inputObj = { message: 'Invalid input' };else inputObj['id'] = faker.random.uuid();
-  return inputObj;
-};
-
-JsonFaker.prototype.getInputType = function (input) {
-  if (typeof input === 'string') {
-    input = this.processTemplate(input, typeof input === 'undefined' ? 'undefined' : _typeof(input));
-    var fileExtension = input.split('.').pop();
-    if (fileExtension === 'json') {
-      // file type json
-      return fileExtension;
-    } else if (IsJsonString(input)) {
-      // input string json object
-      return 'jsonString';
-    } else return 'string';
-  } else if (input.constructor === Array) return 'array';else return typeof input === 'undefined' ? 'undefined' : _typeof(input);
-};
-
-JsonFaker.prototype.getJsonObj = function (input, inputType) {
-  if (inputType === 'object') return input;
-  var getContents = this.processTemplate(input, inputType);
-  if (inputType === 'json') {
-    try {
-      return JSON.parse(getContents);
-    } catch (e) {
-      return 'Invalid input';
-    }
-  }
-  if (inputType === 'jsonString') {
-    return JSON.parse(getContents);
-  }
-};
-
-JsonFaker.prototype.readArray = function (inputArray) {
-  var newArray = [];
-  var self = this;
-  inputArray.forEach(function (element) {
-    var valueType = self.getInputType(element);
-    if (valueType === 'number') newArray.push(element);
-    if (valueType === 'string') {
-      var stringProcess = self.stringProcessing(element);
-      newArray.push(self.getFakerData(stringProcess));
-    }
-    if (valueType === 'object') newArray.push(self.generateMock(element));
-  });
-  return newArray;
-};
-
-JsonFaker.prototype.generateMock = function (inputJson) {
-  var returnData = {};
-  var self = this;
-  for (var property in inputJson) {
-    if (inputJson.hasOwnProperty(property)) {
-      var valueType = self.getInputType(inputJson[property]);
-      if (valueType === 'string') {
-        var stringProcess = self.stringProcessing(inputJson[property]);
-        returnData[property] = self.getFakerData(stringProcess);
-      } else if (valueType === 'number') {
-        returnData[property] = inputJson[property];
-      } else if (valueType === 'object') {
-        returnData[property] = self.generateMock(inputJson[property]);
-      } else if (valueType === 'array') {
-        returnData[property] = self.readArray(inputJson[property]);
-      }
-    }
-  }
-  return returnData;
-};
-
-JsonFaker.prototype.getFakerData = function (inputValue) {
-  if (this.isFaker(inputValue)) {
-    return this.createFakerData(inputValue);
-  } else return inputValue;
-};
-
-JsonFaker.prototype.createFakerData = function (inputValue) {
-  var regExp = /(.*)\((.*)\)\)?/;
-  /*
-  Example
-  input => '@faker.name.findName('someArg')
-  output =>
-  [ '@faker.name.findName(\'someArg\')',
-  '@faker.name.findName',
-  '\'someArg\'',
-  index: 0,
-  input: '@faker.name.findName(\'someArg\')' ]
-  */
-
-  var _inputValue$match = inputValue.match(regExp),
-      _inputValue$match2 = _slicedToArray(_inputValue$match, 3),
-      fakerDef = _inputValue$match2[1],
-      funcArg = _inputValue$match2[2];
-
-  var getStructure = fakerDef.split('.');
-  var returnData;
-  if (getStructure[1] === 'file') {
-    funcArg = funcArg.replace(/'/g, '');
-
-    if (this.fileList.includes(funcArg)) return 'infinit loop()';else this.fileList.push(funcArg);
-
-    var jsonObj = this.getJsonObj(funcArg, 'json');
-    if (jsonObj === 'Invalid input') {
-      this.fileList.pop(); // removing file from array after processing
-      return jsonObj;
+        this.validValueTypes = ['object', 'json', 'jsonString'];
+        this.fileList = [];
+        this.userTemplate = {};
     }
 
-    returnData = this.generateMock(jsonObj);
-    this.fileList.pop(); // removing file from array after processing
-    return returnData;
-  } else {
-    if (funcArg[0] === '[') {
-      // checking if it is array
-      funcArg = funcArg.replace(/'/g, '"');
-      funcArg = JSON.parse(funcArg);
-    }
+    _createClass(JsonFaker, [{
+        key: 'process',
+        value: function process(content, userTemplate) {
+            this.userTemplate = userTemplate;
+            var inputType = this._getInputType(content);
+            if (!this.validValueTypes.includes(inputType)) return 'Invalid input data';
 
-    if (funcArg[0] === '{') {
-      // checking if it is object
-      try {
-        funcArg = JSON.parse(funcArg);
-      } catch (err) {
-        // since JSON.parse threw an error, assume parameters was actually a string
-        funcArg = funcArg;
-      }
-    }
-    returnData = faker[getStructure[1]][getStructure[2]](funcArg);
-  }
-  return returnData;
-};
+            if (inputType === 'json') this.fileList.push(content);
 
-JsonFaker.prototype.isFaker = function (inputValue) {
-  if (inputValue.split('.')[0] === '@faker') return true;else return false;
-};
+            var jsonObj = this._getJsonObj(content, inputType);
+            if (jsonObj === 'Invalid input') return jsonObj;
 
-JsonFaker.prototype.processTemplate = function (input, inputType) {
-  if (inputType === 'json') {
-    input = this.readTemplateFile(input);
-  }
-  return this.repeatString(input);
-};
+            var getReturnData = this._generateMock(jsonObj);
 
-JsonFaker.prototype.repeatString = function (input) {
-  /*
-  regEx = /{{repeat\s+(\d+)}}([\s\S]*?){{\/repeat}}/g
-  {{repeat - a literal char sequence
-  \s+ - 1+ whitespaces
-  (\d+) - Group 1: one or more digits
-  }} - literal }}
-  ([\s\S]*?) - Group 2, any 0+ characters, as few as possible up to the first
-  {{\/repeat}} - literal {{/repeat}}.
-  */
-  var res;
-  if (typeof input === 'string') {
-    res = input.replace(/{{repeat\s+(\d+)}}([\s\S]*?){{\/repeat}}/g, function ($0, $1, $2) {
-      return fillArray($2.trim(), parseInt($1, 10)).join(', ');
-    });
-  }
-  return res;
-};
+            return getReturnData;
+        }
+    }, {
+        key: 'post',
+        value: function post(inputArg) {
+            return this._createResponse(inputArg);
+        }
+    }, {
+        key: 'put',
+        value: function put(inputArg) {
+            return this._createResponse(inputArg);
+        }
+    }, {
+        key: 'delete',
+        value: function _delete(inputArg) {
+            return this._createResponse(inputArg);
+        }
+    }, {
+        key: '_createResponse',
+        value: function _createResponse(inputObj) {
+            if ((typeof inputObj === 'undefined' ? 'undefined' : _typeof(inputObj)) !== 'object') inputObj = {
+                message: 'Invalid input'
+            };else inputObj['id'] = faker.random.uuid();
+            return inputObj;
+        }
+    }, {
+        key: '_getInputType',
+        value: function _getInputType(input) {
+            if (typeof input === 'string') {
+                input = this._processTemplate(input, typeof input === 'undefined' ? 'undefined' : _typeof(input));
+                var fileExtension = input.split('.').pop();
+                if (fileExtension === 'json') {
+                    // file type json
+                    return fileExtension;
+                } else if (this._IsJsonString(input)) {
+                    // input string json object
+                    return 'jsonString';
+                } else return 'string';
+            } else if (input.constructor === Array) return 'array';else return typeof input === 'undefined' ? 'undefined' : _typeof(input);
+        }
+    }, {
+        key: '_getJsonObj',
+        value: function _getJsonObj(input, inputType) {
+            if (inputType === 'object') return input;
+            var getContents = this._processTemplate(input, inputType);
+            if (inputType === 'json') {
+                try {
+                    return JSON.parse(getContents);
+                } catch (e) {
+                    return 'Invalid input';
+                }
+            }
+            if (inputType === 'jsonString') {
+                return JSON.parse(getContents);
+            }
+        }
+    }, {
+        key: '_readArray',
+        value: function _readArray(inputArray) {
+            var newArray = [];
+            var self = this;
+            inputArray.forEach(function (element) {
+                var valueType = self._getInputType(element);
+                if (valueType === 'number') newArray.push(element);
+                if (valueType === 'string') {
+                    var stringProcess = self._stringProcessing(element);
+                    newArray.push(self._getFakerData(stringProcess));
+                }
+                if (valueType === 'object') newArray.push(self._generateMock(element));
+            });
+            return newArray;
+        }
+    }, {
+        key: '_generateMock',
+        value: function _generateMock(inputJson) {
+            var returnData = {};
+            var self = this;
+            for (var property in inputJson) {
+                if (inputJson.hasOwnProperty(property)) {
+                    var valueType = self._getInputType(inputJson[property]);
+                    if (valueType === 'string') {
+                        var stringProcess = self._stringProcessing(inputJson[property]);
+                        returnData[property] = self._getFakerData(stringProcess);
+                    } else if (valueType === 'number') {
+                        returnData[property] = inputJson[property];
+                    } else if (valueType === 'object') {
+                        returnData[property] = self._generateMock(inputJson[property]);
+                    } else if (valueType === 'array') {
+                        returnData[property] = self._readArray(inputJson[property]);
+                    }
+                }
+            }
+            return returnData;
+        }
+    }, {
+        key: '_getFakerData',
+        value: function _getFakerData(inputValue) {
+            if (this._isFaker(inputValue)) {
+                return this._createFakerData(inputValue);
+            } else return inputValue;
+        }
+    }, {
+        key: '_createFakerData',
+        value: function _createFakerData(inputValue) {
+            var regExp = /(.*)\((.*)\)\)?/;
+            /*
+            Example
+            input => '@faker.name.findName('someArg')
+            output =>
+            [ '@faker.name.findName(\'someArg\')',
+            '@faker.name.findName',
+            '\'someArg\'',
+            index: 0,
+            input: '@faker.name.findName(\'someArg\')' ]
+            */
 
-JsonFaker.prototype.readTemplateFile = function (path) {
-  try {
-    var data = fs.readFileSync(path);
-    return data.toString();
-  } catch (e) {
-    return 'Invalid Input';
-  }
-};
+            var _inputValue$match = inputValue.match(regExp),
+                _inputValue$match2 = _slicedToArray(_inputValue$match, 3),
+                fakerDef = _inputValue$match2[1],
+                funcArg = _inputValue$match2[2];
 
-JsonFaker.prototype.stringProcessing = function (inputString) {
-  var self = this;
-  inputString = this.repeatString(inputString);
-  var result = inputString.replace(/\{{(.+?)\}}/gmi, function (match, textInside) {
-    var objectProp = textInside.split('.');
-    if (objectProp[0] === '@faker') return self.createFakerData(textInside);else {
-      var obj = self.userTemplate;
-      while (objectProp.length && (obj = obj[objectProp.shift()])) {}
-      return obj;
-    }
-  });
-  return result;
-};
+            var getStructure = fakerDef.split('.');
+            var returnData;
+            if (getStructure[1] === 'file') {
+                funcArg = funcArg.replace(/'/g, '');
 
-function IsJsonString(str) {
-  if (!isNaN(Number(str))) return false;
-  try {
-    JSON.parse(str);
-  } catch (e) {
-    return false;
-  }
-  return true;
-}
+                if (this.fileList.includes(funcArg)) return 'infinit loop()';else this.fileList.push(funcArg);
 
-function fillArray(s, num) {
-  var arr = [];
-  for (var i = 0; i < num; i++) {
-    arr.push(s);
-  }
-  return arr;
-}
+                var jsonObj = this._getJsonObj(funcArg, 'json');
+                if (jsonObj === 'Invalid input') {
+                    this.fileList.pop(); // removing file from array after processing
+                    return jsonObj;
+                }
+
+                returnData = this._generateMock(jsonObj);
+                this.fileList.pop(); // removing file from array after processing
+                return returnData;
+            } else {
+                if (funcArg[0] === '[') {
+                    // checking if it is array
+                    funcArg = funcArg.replace(/'/g, '"');
+                    funcArg = JSON.parse(funcArg);
+                }
+
+                if (funcArg[0] === '{') {
+                    // checking if it is object
+                    try {
+                        funcArg = JSON.parse(funcArg);
+                    } catch (err) {
+                        // since JSON.parse threw an error, assume parameters was actually a string
+                        funcArg = funcArg;
+                    }
+                }
+                returnData = faker[getStructure[1]][getStructure[2]](funcArg);
+            }
+            return returnData;
+        }
+    }, {
+        key: '_isFaker',
+        value: function _isFaker(inputValue) {
+            if (inputValue.split('.')[0] === '@faker') return true;else return false;
+        }
+    }, {
+        key: '_processTemplate',
+        value: function _processTemplate(input, inputType) {
+            if (inputType === 'json') {
+                input = this._readTemplateFile(input);
+            }
+            return this._repeatString(input);
+        }
+    }, {
+        key: '_repeatString',
+        value: function _repeatString(input) {
+            /*
+            regEx = /{{repeat\s+(\d+)}}([\s\S]*?){{\/repeat}}/g
+            {{repeat - a literal char sequence
+            \s+ - 1+ whitespaces
+            (\d+) - Group 1: one or more digits
+            }} - literal }}
+            ([\s\S]*?) - Group 2, any 0+ characters, as few as possible up to the first
+            {{\/repeat}} - literal {{/repeat}}.
+            */
+            var res;
+            var self = this;
+            if (typeof input === 'string') {
+                res = input.replace(/{{repeat\s+(\d+)}}([\s\S]*?){{\/repeat}}/g, function ($0, $1, $2) {
+                    return self._fillArray($2.trim(), parseInt($1, 10)).join(', ');
+                });
+            }
+            return res;
+        }
+    }, {
+        key: '_readTemplateFile',
+        value: function _readTemplateFile(path) {
+            try {
+                var data = fs.readFileSync(path);
+                return data.toString();
+            } catch (e) {
+                return 'Invalid Input';
+            }
+        }
+    }, {
+        key: '_stringProcessing',
+        value: function _stringProcessing(inputString) {
+            var self = this;
+            inputString = this._repeatString(inputString);
+            var result = inputString.replace(/\{{(.+?)\}}/gmi, function (match, textInside) {
+                var objectProp = textInside.split('.');
+                if (objectProp[0] === '@faker') return self._createFakerData(textInside);else {
+                    var obj = self.userTemplate;
+                    while (objectProp.length && (obj = obj[objectProp.shift()])) {}
+                    return obj;
+                }
+            });
+            return result;
+        }
+    }, {
+        key: '_IsJsonString',
+        value: function _IsJsonString(str) {
+            if (!isNaN(Number(str))) return false;
+            try {
+                JSON.parse(str);
+            } catch (e) {
+                return false;
+            }
+            return true;
+        }
+    }, {
+        key: '_fillArray',
+        value: function _fillArray(s, num) {
+            var arr = [];
+            for (var i = 0; i < num; i++) {
+                arr.push(s);
+            }
+            return arr;
+        }
+    }]);
+
+    return JsonFaker;
+}();
 
 module.exports = new JsonFaker();
 
 /***/ })
-],[962]);
+/******/ ]);
