@@ -1,6 +1,6 @@
 {
   "name": "json-faker",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "This application creates json with fake contextual data. It takes input as a template.",
   "main": "src/json-faker.js",
   "scripts": {
