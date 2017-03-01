@@ -33,5 +33,13 @@
       "it",
       "expect"
     ]
-  }
+  },
+  "keywords": [
+    "json",
+    "faker",
+    "fake",
+    "mocks",
+    "jsonschema",
+    "repeat"
+  ]
 }
