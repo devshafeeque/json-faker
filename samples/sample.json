@@ -33,5 +33,5 @@
     "level1Prop8": "Static string value",
     "level1Prop9": 1123,
     "level1Prop10": "@faker.file.name(./samples/sample.json)",
-    "level1Prop11": "{{prop1}}"
+    "level1Prop11": null
 }

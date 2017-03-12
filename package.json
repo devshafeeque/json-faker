@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --config ./webpack.config.js",
     "test": "mocha",
-    "start": "nodemon ./",
+    "start": "nodemon index.js",
     "coverage": "istanbul cover node_modules/mocha/bin/_mocha"
   },
   "author": "Shafeeque",

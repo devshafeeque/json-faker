@@ -285,7 +285,7 @@ var template = {
     "prop3": "{{personDetails.name}} , {{ personDetails.companyName }}"
 }
 
-var fakeJson = JsonFaker.process(template); // returns object
+var fakeJson = JsonFaker.process(template, myData); // returns object
 ```
 Output
 ```

@@ -44,6 +44,7 @@ class JsonFaker {
     };
 
     _getInputType(input) {
+        if(input == null) return null;
         if (typeof input === 'string') {
             input = this._processTemplate(input, typeof input);
             var fileExtension = input.split('.').pop();
@@ -92,7 +93,8 @@ class JsonFaker {
         for (var property in inputJson) {
             if (inputJson.hasOwnProperty(property)) {
                 var valueType = self._getInputType(inputJson[property]);
-                if (valueType === 'string') {
+                if (valueType === null) returnData[property] = null;
+                else if (valueType === 'string') {
                     let stringProcess = self._stringProcessing(inputJson[property]);
                     returnData[property] = self._getFakerData(stringProcess);
                 } else if (valueType === 'number') {
