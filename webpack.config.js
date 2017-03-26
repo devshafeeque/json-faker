@@ -1,4 +1,6 @@
 var path = require('path');
+var webpack = require('webpack');
+var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 
 module.exports = {
     entry: path.resolve(__dirname, './src/json-faker.js'),
@@ -19,5 +21,10 @@ module.exports = {
                 presets: ['es2015']
             }
         }]
-    }
+    },
+    plugins: [
+      // new webpack.optimize.UglifyJsPlugin({
+      //   compress: { warnings: false }
+      // })
+    ]
 }
