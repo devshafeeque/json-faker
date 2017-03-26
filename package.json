@@ -35,10 +35,12 @@
     ]
   },
   "keywords": [
+    "mock",
+    "data",
     "json",
     "faker",
     "fake",
-    "mocks",
+    "object",
     "jsonschema",
     "repeat"
   ]
